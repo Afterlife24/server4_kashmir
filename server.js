@@ -225,11 +225,7 @@ const app = express();
 var nm = require('nodemailer');
 let savedOTPS = {};
 
-// const corsOptions = {
-//     origin: ['https://scanme-kashmir.gofastapi.com', 'https://client-kashmir.gofastapi.com'], // Replace with actual frontends
-//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//     allowedHeaders: ['Content-Type', 'Authorization'],
-// };
+
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -294,6 +290,7 @@ app.post("/sendOrder", async (req, res) => {
             createdAt: new Date(),
             isDelivered: false,
             tokenId,
+            email,
         };
         console.log("**********")
         console.log("email",email);
@@ -362,33 +359,7 @@ app.post("/markAsDelivered", async (req, res) => {
     }
 });
 
-// Endpoint to reserve a table
-// app.post("/reserveTable", async (req, res) => {
-//     try {
-//         const db = await getDatabase();
-//         const { name, phone, date, time, persons, email } = req.body;
 
-//         const reservation = {
-//             name,
-//             phone,
-//             date,
-//             time,
-//             persons,
-//             email,
-//             createdAt: new Date(),
-//         };
-
-//         const result = await db.collection('reservations').insertOne(reservation);
-
-
-
-//         res.status(200).json({ message: "Reservation saved successfully", id: result.insertedId });
-//     } catch (error) {
-//         res.status(500).json({ error: "Error: " + error.message });
-//     }
-
-
-// });
 app.post("/reserveTable", async (req, res) => {
     try {
         console.log("1");
